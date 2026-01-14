@@ -16,5 +16,50 @@
       console.log(window.Telegram.WebApp);
     }
   </script>
+<body>
+  <h1 id="displayName"></h1>
+
+  <input type="text" id="newId" placeholder="martin">
+  <br><br>
+  <button onclick="saveId()">Simpan ID</button>
+
+  <br><br>
+  <button onclick="cekTelegram()">Cek Telegram</button>
+
+  <script>
+    // Telegram WebApp
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    // ambil ID dari localStorage
+    let savedId = localStorage.getItem("miniapp_id");
+
+    // default ID pertama kali
+    if (!savedId) {
+      savedId = "valid_agent";
+      localStorage.setItem("miniapp_id", savedId);
+    }
+
+    // tampilkan ID
+    document.getElementById("displayName").innerText = savedId;
+
+    function saveId() {
+      const input = document.getElementById("newId").value;
+
+      if (input.trim() === "") {
+        alert("ID tidak boleh kosong");
+        return;
+      }
+
+      localStorage.setItem("miniapp_id", input);
+      location.reload();
+    }
+
+    function cekTelegram() {
+      alert("Mini App berhasil jalan!");
+      console.log(tg.initDataUnsafe?.user);
+    }
+  </script>
 </body>
-</html>
+
