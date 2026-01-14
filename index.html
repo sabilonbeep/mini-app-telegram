@@ -4,17 +4,17 @@
   <title>Mini App Telegram</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
+
 <body>
-  <h1>Halo, ini mini app pertamaku 👋</h1>
+  <h1>Fredrick Adrian Hale </h1>
+
+  <button onclick="cekTelegram()">Cek Telegram</button>
 
   <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
-
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      `<p>Halo ${tg.initDataUnsafe?.user?.first_name || "User"}!</p>`
-    );
+    function cekTelegram() {
+      alert("Mini App berhasil jalan!");
+      console.log(window.Telegram.WebApp);
+    }
   </script>
 </body>
 </html>
