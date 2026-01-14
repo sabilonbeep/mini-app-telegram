@@ -8,8 +8,41 @@
 <body>
   <h1 id="displayName">Loading...</h1>
 
-  <input type="text" id="newId" placeholder="Martin">
+  <input type="text" id="newId" placeholder="Ganti ID kamu">
   <br><br>
   <button id="saveBtn">Simpan ID</button>
 
   <script>
+    // cek Telegram WebApp ada atau tidak
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      tg.expand();
+    }
+
+    // ambil ID dari localStorage
+    let savedId = localStorage.getItem("miniapp_id");
+
+    if (!savedId) {
+      savedId = "valid_agent";
+      localStorage.setItem("miniapp_id", savedId);
+    }
+
+    // tampilkan ID
+    document.getElementById("displayName").innerText = savedId;
+
+    // tombol simpan
+    document.getElementById("saveBtn").onclick = function () {
+      const input = document.getElementById("newId").value;
+
+      if (input.trim() === "") {
+        alert("ID tidak boleh kosong");
+        return;
+      }
+
+      localStorage.setItem("miniapp_id", input);
+      location.reload();
+    };
+  </script>
+</body>
+</html>
