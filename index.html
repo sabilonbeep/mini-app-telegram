@@ -4,37 +4,25 @@
   <title>Mini App Telegram</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body>
-  <h1>Fredrick Adrian Hale </h1>
 
-  <button onclick="cekTelegram()">Cek Telegram</button>
+<body>
+  <h1 id="displayName">Loading...</h1>
+
+  <input type="text" id="newId" placeholder="Martin">
+  <br><br>
+  <button id="saveBtn">Simpan ID</button>
 
   <script>
-    function cekTelegram() {
-      alert("Mini App berhasil jalan!");
-      console.log(window.Telegram.WebApp);
+    // cek Telegram WebApp ada atau tidak
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      tg.expand();
     }
-  </script>
-<body>
-  <h1 id="displayName"></h1>
-
-  <input type="text" id="newId" placeholder="martin">
-  <br><br>
-  <button onclick="saveId()">Simpan ID</button>
-
-  <br><br>
-  <button onclick="cekTelegram()">Cek Telegram</button>
-
-  <script>
-    // Telegram WebApp
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
 
     // ambil ID dari localStorage
     let savedId = localStorage.getItem("miniapp_id");
 
-    // default ID pertama kali
     if (!savedId) {
       savedId = "valid_agent";
       localStorage.setItem("miniapp_id", savedId);
@@ -43,7 +31,8 @@
     // tampilkan ID
     document.getElementById("displayName").innerText = savedId;
 
-    function saveId() {
+    // tombol simpan
+    document.getElementById("saveBtn").onclick = function () {
       const input = document.getElementById("newId").value;
 
       if (input.trim() === "") {
@@ -53,12 +42,7 @@
 
       localStorage.setItem("miniapp_id", input);
       location.reload();
-    }
-
-    function cekTelegram() {
-      alert("Mini App berhasil jalan!");
-      console.log(tg.initDataUnsafe?.user);
-    }
+    };
   </script>
 </body>
-
+</html>
