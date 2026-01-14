@@ -13,32 +13,3 @@
   <button id="saveBtn">Simpan ID</button>
 
   <script>
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      tg.expand();
-    }
-
-    let savedId = localStorage.getItem("miniapp_id");
-
-    if (!savedId) {
-      savedId = "valid_agent";
-      localStorage.setItem("miniapp_id", savedId);
-    }
-
-    document.getElementById("displayName").innerText = savedId;
-
-    document.getElementById("saveBtn").onclick = function () {
-      const input = document.getElementById("newId").value;
-
-      if (input.trim() === "") {
-        alert("ID tidak boleh kosong");
-        return;
-      }
-
-      localStorage.setItem("miniapp_id", input);
-      location.reload();
-    };
-  </script>
-</body>
-</html>
